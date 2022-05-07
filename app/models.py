@@ -16,17 +16,20 @@ class Book(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    title = db.Column(db.Text)
    author_id = db.Column(db.Integer, db.ForeignKey('author.id'))
+   available = db.relationship("Available", backref="book", lazy="dynamic")
 
    
    def __str__(self):
-       return f"<Book {self.id}{self.Books}>"
+       return f"<Book {self.id}{self.Book}>"
 
 
 class Available(db.Model):
    id = db.Column(db.Integer, primary_key=True)
+   title = db.Column(db.Text)
    borrow = db.Column(db.Text)
    date = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-   available = db.relationship("Available", backref="book", lazy="dynamic")
+   book_id = db.Column(db.Integer, db.ForeignKey('book.id'))
+
 
    def __str__(self):
        return f"<Available {self.id}{self.Available}>"

@@ -1,0 +1,29 @@
+flask shell
+
+db
+
+Author
+
+Book
+
+Available
+
+a=Author(firstname="Mickiewicz", lastname="Adam")
+
+db.session.add(a)
+
+db.session.commit()
+
+a = Author.query.first() / Author.query.get(1)
+
+a = Author.query.get(1)
+
+book = Book(title="Pan Tadeusz", author=a)
+
+b = Book.query.get(3)
+
+available = Available(title="Dziady", borrow="Yes", book=b)
+
+db.session.add(b)
+
+db.session.commit()
